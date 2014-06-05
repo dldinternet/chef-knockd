@@ -6,8 +6,8 @@
 [<%= name %>]
      sequence    = <%= rule['sequence'].join(',') %>
      seq_timeout = 5
-     start_command = ufw allow from %IP% to any port <%= rule['port'] %>
-     stop_command  = ufw delete allow from %IP% to any port <%= rule['port'] %>
+     start_command = <%= rule['start'] ? rule['start'] : "ufw allow from %IP% to any port #{rule['port']}" %>
+     stop_command  = <%= rule['stop']  ? rule['stop']  : "ufw delete allow from %IP% to any port #{rule['port']}" %>
      tcpflags    = syn
      cmd_timeout   = <%= rule['timeout'] %>
 <% end %>
